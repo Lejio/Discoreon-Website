@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "../assets/discoreon_pokeball.png";
+import Logo from "@/assets/discoreon_pokeball.png";
 import { Poppins } from "next/font/google";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -11,13 +11,10 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { SITE_URL } from "@/utils/globals";
 import NavItem from "./NavItem";
 
-import LoginButton from "./menu/LoginButton";
+import LoginButton from "@/app/components/LoginButton";
 import { UserMetadata } from "@supabase/supabase-js";
 
-
-const MainNavbar = ({ user_metadata }: {
-  user_metadata: UserMetadata
-}) => {
+const MainNavbar = ({ user_metadata }: { user_metadata: UserMetadata | null }) => {
   const [navbar, setNavbar] = useState("");
   const supabase = createClientComponentClient();
   const router = useRouter();

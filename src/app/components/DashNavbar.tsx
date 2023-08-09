@@ -10,8 +10,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import NavItem from "./NavItem";
 
-import LogoutButton from "./home/LogoutButton";
-
+import LogoutButton from "@/app/dashboard/components/LogoutButton";
 
 const DashNavbar = () => {
   const [navbar, setNavbar] = useState("");

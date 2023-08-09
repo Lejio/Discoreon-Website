@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import MotionButton from "../MotionButton";
+import MotionButton from "../../components/MotionButton";
 import { SITE_URL } from "@/utils/globals";
 
 interface ProductProps {
-  name: string,
-  id: string,
-  price: number,
-  currency: string,
-  interval: string
+  name: string;
+  id: string;
+  price: number;
+  currency: string;
+  interval: string | null;
 }
 
 const ProductCard = ({ name, id, price, currency, interval }: ProductProps) => {

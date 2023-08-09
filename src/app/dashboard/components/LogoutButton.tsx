@@ -2,12 +2,11 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import MotionButton from "../MotionButton";
+import MotionButton from "@/app/components/MotionButton";
 import { SITE_URL } from "@/utils/globals";
 
 // LogoutButton Component --> A wrapper for a MotionButton that signs a user out when clicked.
 export default function LoginButton() {
-
   const supabase = createClientComponentClient();
 
   // NextJS router hook.
@@ -15,12 +14,11 @@ export default function LoginButton() {
 
   // Async MotionButton onClick handler.
   const logoutHandler = async () => {
-    
     // Signs the current user out.
     const { error } = await supabase.auth.signOut();
 
     // Redirects the user to the main menu
-    router.push(`${SITE_URL}/`)
+    router.push(`${SITE_URL}/`);
   };
 
   return (

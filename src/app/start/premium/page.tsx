@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "@/components/MainNavbar";
+// import Navbar from "@/components/MainNavbar";
 
 const page = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       Premium Page
     </div>
   );

@@ -2,9 +2,9 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import HomeHero from "@/components/home/HomeHero";
+import HomeHero from "@/app/dashboard/components/HomeHero";
 
-import DashNavbar from "@/components/DashNavbar";
+// import DashNavbar from "@/components/DashNavbar";
 
 // Home Page --> The landing page of the user after they have successfully signed up with discord.
 const Home = async () => {
@@ -26,7 +26,7 @@ const Home = async () => {
 
   return (
     <main className="flex flex-col align-middle justify-center">
-      <DashNavbar />
+      {/* <DashNavbar /> */}
       <HomeHero discord_user={discord_metadata} />
     </main>
   );

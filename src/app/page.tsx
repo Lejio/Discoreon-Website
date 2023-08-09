@@ -1,13 +1,13 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-import MainNavbar from "@/components/MainNavbar";
-import SubHero from "@/components/menu/SubHero";
-import EmbedBody from "@/components/menu/EmbedBody";
-import TypesImage from "@/components/menu/TypesImage";
-import Hero from "@/components/menu/Hero";
-import Rare from "@/components/menu/Rare";
-import Footer from "@/components/menu/Footer";
+import MainNavbar from "@/app/components/MainNavbar";
+import SubHero from "@/app/components/SubHero";
+import EmbedBody from "@/app/components/EmbedBody";
+import TypesImage from "@/app/components/TypesImage";
+import Hero from "@/app/components/Hero";
+import Rare from "@/app/components/Rare";
+import Footer from "@/app/components/Footer";
 
 export default async function MainMenu() {
   // Created a supabase server component using cookies.
@@ -18,10 +18,11 @@ export default async function MainMenu() {
     data: { session },
   } = await supabase.auth.getSession();
 
-
   return (
     <main className="flex flex-col justify-center items-center">
-      <MainNavbar user_metadata={session ? session.user.user_metadata : session}/>
+      <MainNavbar
+        user_metadata={session ? session.user.user_metadata : session}
+      />
       <Hero />
       <SubHero />
       <EmbedBody />

@@ -2,7 +2,7 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import MotionButton from "../MotionButton";
+import MotionButton from "@/app/components/MotionButton";
 import { SITE_URL } from "@/utils/globals";
 
 export default function LoginButton() {

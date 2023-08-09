@@ -2,7 +2,7 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import DashNavbar from "@/components/DashNavbar";
+// import DashNavbar from "@/components/DashNavbar";
 
 const Pokedex = async () => {
   // Created a supabase server component using cookies.
@@ -23,7 +23,7 @@ const Pokedex = async () => {
 
   return (
     <div>
-      <DashNavbar />
+      {/* <DashNavbar /> */}
       Pokedex
     </div>
   );

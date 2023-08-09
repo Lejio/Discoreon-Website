@@ -9,11 +9,11 @@ const ProductSection = async () => {
   const plans = []
 
   for (const prod of products) {
-    const product = await stripe.products.retrieve(prod.product)
+    const product = await stripe.products.retrieve(prod.product.toString())
     plans.push({
       name: product.name,
       id: prod.id,
-      price: prod.unit_amount / 100,
+      price: prod.unit_amount! / 100,
       currency: prod.currency,
       interval: prod.recurring ? prod.recurring.interval : null,
     });

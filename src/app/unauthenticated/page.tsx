@@ -3,7 +3,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import MainNavbar from '@/components/MainNavbar'
+// import MainNavbar from '@/components/MainNavbar'
 
 const Unauthenticated = async () => {
     const supabase = createServerComponentClient({ cookies })
@@ -15,7 +15,7 @@ const Unauthenticated = async () => {
 
   return (
     <div>
-      <MainNavbar user_metadata={undefined} />
+      {/* <MainNavbar user_metadata={undefined} /> */}
       Please sign in to continue.
     </div>
   )
