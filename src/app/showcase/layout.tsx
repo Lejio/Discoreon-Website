@@ -1,10 +1,10 @@
-import './globals.css'
-
+import "@/app/globals.css";
 
 export const metadata = {
-  title: 'Discoreon',
-  description: 'Invite the all new, advanced, full stack pokemon bot to your server to spice things up!',
-}
+  title: "Discoreon Showcase",
+  description:
+    "View all of the cool pokemon that is available in Discoreon!",
+};
 
 export default function RootLayout({ children }: {
   children: React.ReactNode
