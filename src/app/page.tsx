@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-import MainNavbar from "@/app/components/MainNavbar";
+// import MainNavbar from "@/app/@unauthenticatedNav/MainNavbar";
 import SubHero from "@/app/components/SubHero";
 import EmbedBody from "@/app/components/EmbedBody";
 import TypesImage from "@/app/components/TypesImage";
@@ -20,9 +20,6 @@ export default async function MainMenu() {
 
   return (
     <main className="flex flex-col justify-center items-center">
-      <MainNavbar
-        user_metadata={session ? session.user.user_metadata : session}
-      />
       <Hero />
       <SubHero />
       <EmbedBody />

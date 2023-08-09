@@ -4,13 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { Poppins } from "next/font/google";
-
-// Poppins font loader.
-const poppins = Poppins({
-  weight: "600",
-  subsets: ["latin"],
-});
 
 // NavItem Component --> A HTML li wrapper that adds come cool animations to it.
 const NavItem = ({ item }: {
@@ -56,7 +49,7 @@ const NavItem = ({ item }: {
     <li>
       <motion.div whileHover="hover" initial="default" animate="default">
         <Link
-          className={`flex flex-col ${poppins.className} text-lg hover:text-light-primary duration-300`}
+          className={`flex flex-col text-lg hover:text-light-primary duration-300`}
           href={item.href}
         >
           {/* Text in this span is measured in pixels and then passed into textWidth */}

@@ -3,8 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "../assets/discoreon_pokeball.png";
-import { Poppins } from "next/font/google";
+import Logo from "@/assets/discoreon_pokeball.png";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -12,7 +11,7 @@ import NavItem from "./NavItem";
 
 import LogoutButton from "@/app/dashboard/components/LogoutButton";
 
-const DashNavbar = () => {
+const DashNav = () => {
   const [navbar, setNavbar] = useState("");
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -22,13 +21,14 @@ const DashNavbar = () => {
   };
 
   const navOptions = [
-    { label: "Dashboard", href: "/home" },
+    { label: "Dashboard", href: "/" },
     { label: "Pokedex", href: "/pokedex" },
     { label: "Inventory", href: "/inventory" },
   ];
 
   const logoutHandler = async () => {
     // Creates a session object to retrieve the state of the session.
+    console.log('clicked')
     const { error } = await supabase.auth.signOut();
     router.push("/");
   };
@@ -85,4 +85,4 @@ const DashNavbar = () => {
   );
 };
 
-export default DashNavbar;
+export default DashNav;

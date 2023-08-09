@@ -2,7 +2,7 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import DashNavbar from "@/app/components/DashNavbar";
+import DashNavbar from "@/app/@authenticatedNav/DashNavbar";
 
 const Inventory = async () => {
   // Created a supabase server component using cookies.
@@ -21,11 +21,7 @@ const Inventory = async () => {
   // Gets the metadata object of the signed in discord user after checking session exists.
   const discord_metadata = session.user.user_metadata;
 
-  return (
-    <div>
-      Inventory
-    </div>
-  );
+  return <div>Inventory</div>;
 };
 
 export default Inventory;

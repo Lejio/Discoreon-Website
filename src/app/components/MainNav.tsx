@@ -14,7 +14,9 @@ import NavItem from "./NavItem";
 import LoginButton from "@/app/components/LoginButton";
 import { UserMetadata } from "@supabase/supabase-js";
 
-const MainNavbar = ({ user_metadata }: { user_metadata: UserMetadata | null }) => {
+// { user_metadata }: { user_metadata: UserMetadata | null }
+
+const MainNav = () => {
   const [navbar, setNavbar] = useState("");
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -29,7 +31,7 @@ const MainNavbar = ({ user_metadata }: { user_metadata: UserMetadata | null }) =
     { label: "Showcase", href: "/showcase" },
   ];
 
-  console.log(user_metadata);
+  // console.log(user_metadata);
 
   // Image loader, required by Image/NextJS to load images from other sources.
   const loginHandler = async () => {
@@ -118,4 +120,4 @@ const MainNavbar = ({ user_metadata }: { user_metadata: UserMetadata | null }) =
   );
 };
 
-export default MainNavbar;
+export default MainNav;

@@ -15,10 +15,11 @@ export default function LoginButton() {
   // Async MotionButton onClick handler.
   const logoutHandler = async () => {
     // Signs the current user out.
+    console.log("clicked");
     const { error } = await supabase.auth.signOut();
 
     // Redirects the user to the main menu
-    router.push(`${SITE_URL}/`);
+    router.refresh();
   };
 
   return (
