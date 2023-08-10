@@ -30,7 +30,8 @@ export async function POST(request: Request) {
     // Handle the event
     switch (event!.type) {
       case "customer.subscription.deleted":
-        const customerSubscriptionDeleted = event!.data.object;
+        const customerSubscriptionDeleted = event!.data
+          .object as Stripe.Subscription;
         await deleteSubscription(customerSubscriptionDeleted);
         // Then define and call a function to handle the event customer.subscription.deleted
         break;
@@ -55,26 +56,17 @@ export async function POST(request: Request) {
 
 async function updateSubscription(event: Stripe.Subscription) {
   const customer_id = event.customer;
-  // cus_OQGMhyRlfkj0lN
   const subscription_id = event.id;
-  // sub_1NdPpvG8aVn50SPlr7ZUZ7PF
   const price_id = event.items.data[0].price.id;
-  // prod_ONpLO4K6EWSzAz
 
   const subscription_status = event.status;
-  // const supabase = createClient<Database>(
-  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  //   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  // );
+
   console.log("customer_id")
   console.log(customer_id);
   const { data: test_user, error } = await supabase
     .from("test_user")
     .select("*")
     .eq("stripe_customer_id", customer_id);
-
-  console.log("in database");
-  console.log(test_user);
 
   if (test_user?.length !== 0) {
     console.log("Update customer");

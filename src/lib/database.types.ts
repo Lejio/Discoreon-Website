@@ -12,6 +12,8 @@ export interface Database {
       test_user: {
         Row: {
           created_at: string | null
+          discord_id: number | null
+          discord_name: string | null
           id: number
           price_id: string | null
           stripe_customer_id: string
@@ -20,6 +22,8 @@ export interface Database {
         }
         Insert: {
           created_at?: string | null
+          discord_id?: number | null
+          discord_name?: string | null
           id?: number
           price_id?: string | null
           stripe_customer_id: string
@@ -28,6 +32,8 @@ export interface Database {
         }
         Update: {
           created_at?: string | null
+          discord_id?: number | null
+          discord_name?: string | null
           id?: number
           price_id?: string | null
           stripe_customer_id?: string

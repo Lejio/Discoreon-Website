@@ -1,34 +1,49 @@
-
 import React from "react";
-import { useSearchParams } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect } from "react";
-import { SITE_URL } from "@/utils/globals";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { stripe } from "@/utils/stripe";
+import { supabase } from "@/utils/supabase";
 
-const page = () => {
-  const searchParams = useSearchParams();
-  const session_id = searchParams.get("session_id");
-  const supabase = createClientComponentClient();
+const page = async ({
+  params,
+}: {
+  params: {
+    session_id: string;
+  };
+}) => {
+  const supabase_auth = createServerComponentClient({ cookies });
 
-  useEffect(() => {
-    const session = supabase.auth.getSession()
+  // Obtains the current client session from cookies.
+  const {
+    data: { session },
+  } = await supabase_auth.auth.getSession();
 
-    fetch(`${SITE_URL}/api/discord`,
-    {
-      method: 'POST',
-      body: JSON.stringify(
-        {
-          session_id: session_id
-        }
-      )
-    }
-    )
-  })
-  // const session = await stripe.checkout.sessions.retrieve(session_id!);
+  const user_metadata = session?.user.user_metadata;
+  const provider_id: number = Number.parseInt(user_metadata!.provider_id);
+  const full_name: string = user_metadata!.full_name;
 
-  // console.log(session);
+  const stripe_session = await stripe.checkout.sessions.retrieve(
+    params.session_id
+  );
+  console.log(stripe_session.customer);
 
-  return <div>Success!: Session_ID {session_id}</div>;
+  const { data: test_user, error } = await supabase
+    .from("test_user")
+    .update({ discord_id: provider_id, discord_name: full_name })
+    .eq("stripe_customer_id", stripe_session.customer!.toString())
+    .select();
+
+  console.log(test_user)
+
+  return (
+    <div>
+      Success!: Session_ID {params.session_id}
+      <p>
+        {provider_id}
+        {full_name}
+      </p>
+    </div>
+  );
 };
 
 export default page;
