@@ -18,6 +18,8 @@ export default async function MainMenu() {
     data: { session },
   } = await supabase.auth.getSession();
 
+  console.log(session?.user.user_metadata)
+
   return (
     <main className="flex flex-col justify-center items-center">
       <Hero />

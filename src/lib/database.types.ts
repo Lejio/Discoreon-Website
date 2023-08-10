@@ -12,28 +12,25 @@ export interface Database {
       test_user: {
         Row: {
           created_at: string | null
-          email: string | null
           id: number
-          name: string | null
-          price: string | null
+          invoice_id: string | null
+          price_id: string | null
           stripe_customer_id: string | null
           subscription_status: string | null
         }
         Insert: {
           created_at?: string | null
-          email?: string | null
           id?: number
-          name?: string | null
-          price?: string | null
+          invoice_id?: string | null
+          price_id?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
         }
         Update: {
           created_at?: string | null
-          email?: string | null
           id?: number
-          name?: string | null
-          price?: string | null
+          invoice_id?: string | null
+          price_id?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
         }
@@ -54,6 +51,3 @@ export interface Database {
     }
   }
 }
-
-
-// https://supabase.com/docs/reference/javascript/typescript-support
