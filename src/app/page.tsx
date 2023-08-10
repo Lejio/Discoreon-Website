@@ -1,5 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { supabase } from "@/utils/supabase";
 
 // import MainNavbar from "@/app/@unauthenticatedNav/MainNavbar";
 import SubHero from "@/app/components/SubHero";
