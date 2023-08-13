@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      test_user: {
+      test_subscription: {
         Row: {
           created_at: string | null
           discord_id: number | null
@@ -39,6 +39,33 @@ export interface Database {
           stripe_customer_id?: string
           subscription_id?: string | null
           subscription_status?: string | null
+        }
+        Relationships: []
+      }
+      test_user: {
+        Row: {
+          created_at: string
+          discord_id: string | null
+          discord_name: string | null
+          id: number
+          premium: string | null
+          subscription_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          discord_id?: string | null
+          discord_name?: string | null
+          id?: number
+          premium?: string | null
+          subscription_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          discord_id?: string | null
+          discord_name?: string | null
+          id?: number
+          premium?: string | null
+          subscription_id?: string | null
         }
         Relationships: []
       }

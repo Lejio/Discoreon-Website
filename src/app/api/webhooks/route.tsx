@@ -1,11 +1,9 @@
 import { stripe } from "@/utils/stripe";
 import Stripe from "stripe";
 import { supabase } from "@/utils/supabase";
-
-// import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-// import { Database } from "@/lib/database.types";
-// import { createClient } from "@supabase/supabase-js";
+import { test } from "node:test";
+
 
 // In order to test this, I have to start a ngrok server (npx ngrok http 3000) and add the endpoint + the route to this path into stripe. Also the signing secret changes.
 export async function POST(request: Request) {
@@ -58,32 +56,33 @@ async function updateSubscription(event: Stripe.Subscription) {
   const customer_id = event.customer;
   const subscription_id = event.id;
   const price_id = event.items.data[0].price.id;
-
   const subscription_status = event.status;
 
   console.log("customer_id")
   console.log(customer_id);
-  const { data: test_user, error } = await supabase
-    .from("test_user")
+  const { data: test_subscription, error } = await supabase
+    .from("test_subscription")
     .select("*")
     .eq("stripe_customer_id", customer_id);
-
-  if (test_user?.length !== 0) {
+  console.log(test_subscription?.length)
+  if (test_subscription?.length !== 0) {
     console.log("Update customer");
-    const { data: test_user, error } = await supabase
-      .from("test_user")
+    const { data: test_subscription, error } = await supabase
+      .from("test_subscription")
       .update({
         created_at: Date.now().toString(),
         subscription_id: subscription_id,
-        subscription_status: subscription_status,
+        subscription_status: subscription_status.toString(),
         price_id: price_id,
       })
       .eq("stripe_customer_id", customer_id)
       .select();
+
+      console.log(error)
   } else {
     console.log("Add customer");
-    const { data: test_user, error } = await supabase
-      .from("test_user")
+    const { data: test_subscription, error } = await supabase
+      .from("test_subscription")
       .insert([
         {
           stripe_customer_id: customer_id.toString(),
@@ -93,11 +92,18 @@ async function updateSubscription(event: Stripe.Subscription) {
         },
       ])
       .select();
-    console.log(test_user)
+      console.log(test_subscription);
   }
 }
 
-async function deleteSubscription(event: Stripe.Event.Data.Object) {
-  console.log("Delete Event");
-  console.log(event);
+async function deleteSubscription(event: Stripe.Subscription) {
+    const customer_id = event.customer;
+    const subscription_status = event.status;
+    const { data: test_subscription, error } = await supabase
+      .from("test_subscription")
+      .update({
+        subscription_status: subscription_status.toString(),
+      })
+      .eq("stripe_customer_id", customer_id)
+      .select();
 }

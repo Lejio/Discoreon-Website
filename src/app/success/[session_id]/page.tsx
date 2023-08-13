@@ -25,15 +25,21 @@ const page = async ({
   const stripe_session = await stripe.checkout.sessions.retrieve(
     params.session_id
   );
+  console.log("stripe session");
   console.log(stripe_session.customer);
 
-  const { data: test_user, error } = await supabase
-    .from("test_user")
+  const { data: test_subscription, error } = await supabase
+    .from("test_subscription")
     .update({ discord_id: provider_id, discord_name: full_name })
-    .eq("stripe_customer_id", stripe_session.customer!.toString())
-    .select();
+    .eq("stripe_customer_id", stripe_session.customer!.toString());
 
-  console.log(test_user)
+  // const { data: test_subscription, error } = await supabase
+  //   .from("test_subscription")
+  //   .select("*")
+  //   .eq("stripe_customer_id", stripe_session.customer!.toString());
+  // console.log(error)
+  // console.log(test_subscription);
+
 
   return (
     <div>
