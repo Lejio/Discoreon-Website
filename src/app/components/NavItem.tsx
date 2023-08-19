@@ -1,17 +1,14 @@
 `use client`;
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-
+import { NavItemType } from "@/types/types";
 import { motion, Variants } from "framer-motion";
-import Link from "next/link";
+import { NavbarItem, Link } from "@nextui-org/react";
 
 // NavItem Component --> A HTML li wrapper that adds come cool animations to it.
-const NavItem = ({ item }: {
-  item: {
-    label: string,
-    href: string
-  }
-}) => {
+const NavItem = ({
+  item,
+}: { item: NavItemType }) => {
   // React useRef hook to reference HTML elements.
   const spanRef = useRef(null);
   // Text width state used to measure how long the SVG line should be.
@@ -39,18 +36,21 @@ const NavItem = ({ item }: {
     },
   };
   // Uses getBoundingClientRect method to obtain the width of the span containing the text.
-  const getTextWidthInPixels = (ref: { getBoundingClientRect: () => { (): any; new(): any; width: any; }; }) => ref.getBoundingClientRect().width;
+  const getTextWidthInPixels = (ref: {
+    getBoundingClientRect: () => { (): any; new (): any; width: any };
+  }) => ref.getBoundingClientRect().width;
 
   useEffect(() => {
     setTextWidth(getTextWidthInPixels(spanRef.current!));
   }, [spanRef]);
 
   return (
-    <li>
+    <NavbarItem className=" mx-[10%]">
       <motion.div whileHover="hover" initial="default" animate="default">
         <Link
           className={`flex flex-col text-lg hover:text-light-primary duration-300`}
           href={item.href}
+          color={item.color}
         >
           {/* Text in this span is measured in pixels and then passed into textWidth */}
           <span ref={spanRef}>{item.label}</span>
@@ -72,7 +72,7 @@ const NavItem = ({ item }: {
           </motion.svg>
         </Link>
       </motion.div>
-    </li>
+    </NavbarItem>
   );
 };
 
