@@ -48,12 +48,17 @@ const NavItem = ({
     <NavbarItem className=" mx-[10%]">
       <motion.div whileHover="hover" initial="default" animate="default">
         <Link
-          className={`flex flex-col text-lg hover:text-light-primary duration-300`}
+          className={`flex flex-col text-lg`}
           href={item.href}
           color={item.color}
         >
           {/* Text in this span is measured in pixels and then passed into textWidth */}
-          <span ref={spanRef}>{item.label}</span>
+          <span
+            ref={spanRef}
+            className=" hover:text-light-primary duration-300"
+          >
+            {item.label}
+          </span>
           <motion.svg
             className="flex"
             // Using the textWidth to determine the length of the SVG line.

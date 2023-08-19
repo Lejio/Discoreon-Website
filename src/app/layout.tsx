@@ -26,7 +26,8 @@ export default async function RootLayout(props: {
     <html lang="en" className="light">
       <body>
         <Providers>
-          {session ? <DashNav /> : <MainNav />}
+          {/* {session ? <DashNav /> : <MainNav />} */}
+          <MainNav />
           {props.children}
         </Providers>
       </body>

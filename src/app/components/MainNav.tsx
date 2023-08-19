@@ -12,12 +12,12 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
+import LoginButton from "./LoginButton";
 
 const poppins = Poppins({
   weight: "400",
@@ -28,11 +28,6 @@ const poppins = Poppins({
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const bruh = {
-    label: "brug",
-    href: "/",
-  };
-
   const navItems: Array<NavItemType> = [
     { label: "Get Started", href: "/start", color: "foreground" },
     { label: "Invite", href: "/invite", color: "foreground" },
@@ -40,8 +35,9 @@ export default function App() {
     { label: "Showcase", href: "/showcase", color: "foreground" },
   ];
 
-  const navItemComponents = navItems.map(
-    (item: NavItemType) => <NavItem item={item}/>);
+    const navItemComponents = navItems.map((item: NavItemType) => (
+      <NavItem item={item} key={item.href}/>
+    ));
 
   const menuItems = [
     "Profile",
@@ -61,10 +57,11 @@ export default function App() {
       onMenuOpenChange={setIsMenuOpen}
       className={` ${poppins.className}`}
       classNames={{
-        wrapper: "max-w-full md:mx-[10%]",
+        wrapper: "max-w-full mx-[10%] gap-x-0",
+        content: "w-auto"
       }}
     >
-      <NavbarBrand>
+      <NavbarBrand className=" block">
         <Image src={Logo} alt={"Discoreon Logo"} height={50} />
       </NavbarBrand>
 
@@ -73,14 +70,9 @@ export default function App() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
 
         <NavbarItem className="md:block hidden">
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <LoginButton />
         </NavbarItem>
       </NavbarContent>
 
