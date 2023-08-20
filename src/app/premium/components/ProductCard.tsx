@@ -44,8 +44,8 @@ const ProductCard = ({ name, id, price, currency, interval }: ProductProps) => {
       const res_data = await response.json();
       router.push(res_data.checkout_url);
     } else {
-      // If the session is authenticated, then take them directly to the home page.
-      router.push(`${SITE_URL}/start/premium`);
+      // If the session is unauthenticated, then take them directly to the home page.
+      router.push(`${SITE_URL}/`);
     }
   };
 

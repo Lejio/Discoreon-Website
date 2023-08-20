@@ -1,6 +1,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import './globals.css'
 import { cookies } from 'next/headers';
+import { Providers } from './providers';
 import DashNav from './components/DashNav';
 import MainNav from './components/MainNav';
 
@@ -22,10 +23,13 @@ export default async function RootLayout(props: {
   } = await supabase.auth.getSession();
 
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body>
-        {session ? <DashNav /> : <MainNav />}
-        {props.children}
+        <Providers>
+          {/* {session ? <DashNav /> : <MainNav />} */}
+          <MainNav />
+          {props.children}
+        </Providers>
       </body>
     </html>
   );

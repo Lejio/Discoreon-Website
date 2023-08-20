@@ -16,5 +16,7 @@ export async function GET(request: Request) {
   // return NextResponse.redirect(
   //   "https://smooth-ralph-mechanics-fight.trycloudflare.com/dashboard"
   // );
-  return NextResponse.redirect(`${SITE_URL}/`);
+  
+  // Redirecting to dashboard for now. Plan on working on parallel routes on main page.
+  return NextResponse.redirect(`${SITE_URL}/dashboard`);
 }
