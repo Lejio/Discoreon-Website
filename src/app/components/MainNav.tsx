@@ -15,6 +15,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Divider,
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
 import LoginButton from "./LoginButton";
@@ -39,57 +40,49 @@ export default function App() {
       <NavItem item={item} key={item.href}/>
     ));
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
-
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       className={` ${poppins.className}`}
       classNames={{
-        wrapper: "max-w-full mx-[10%] gap-x-0",
-        content: "w-auto"
+        wrapper: "max-w-full lg:mx-[10%] gap-x-0",
+        content: "w-auto",
       }}
     >
       <NavbarBrand className=" block">
         <Image src={Logo} alt={"Discoreon Logo"} height={50} />
       </NavbarBrand>
 
-      <NavbarContent className="hidden md:flex gap-x-0" justify="center">
+      <NavbarContent className="hidden lg:flex gap-x-0" justify="center">
         {navItemComponents}
       </NavbarContent>
 
       <NavbarContent justify="end">
-
-        <NavbarItem className="md:block hidden">
+        <NavbarItem className="lg:block hidden">
           <LoginButton />
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="center">
+      <NavbarContent justify="center" className=" w-[10%] lg:hidden">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="md:hidden"
+          className="lg:hidden w-full"
           icon={isMenuOpen ? AiOutlineClose : AiOutlineMenu}
         />
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link color="foreground" className="w-full" href="#" size="lg">
-              {item}
+        {navItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.label}-${index}`}>
+            <Link
+              color="foreground"
+              className="w-full my-[5%] justify-center"
+              href={item.href}
+              size="lg"
+            >
+              {item.label}
             </Link>
+            <Divider className="my-4" />
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

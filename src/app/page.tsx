@@ -9,6 +9,7 @@ import TypesImage from "@/app/components/TypesImage";
 import Hero from "@/app/components/Hero";
 import Rare from "@/app/components/Rare";
 import Footer from "@/app/components/Footer";
+// import BackgroundImage from "./components/BackgroundImage";
 
 export default async function MainMenu() {
   // Created a supabase server component using cookies.
@@ -21,9 +22,10 @@ export default async function MainMenu() {
 
   // Logging out the user metadata to check for the curretn session and account information.
   // console.log(session?.user.user_metadata)
+  
 
   return (
-    <main className="flex flex-col justify-center items-center">
+    <main className="flex flex-col justify-center items-center" >
       <Hero />
       <SubHero />
       <EmbedBody />
