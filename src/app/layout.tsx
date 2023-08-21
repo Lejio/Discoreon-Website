@@ -25,7 +25,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const user_data: UserMetadata | undefined = session?.user.user_metadata;
 
   return (
-    <html lang="en" className="light">
+    <html lang="en">
       <body>
         <Providers>
           {/* {session ? <DashNav /> : <MainNav />} */}

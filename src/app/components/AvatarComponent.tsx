@@ -7,6 +7,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  Divider,
 } from "@nextui-org/react";
 import { UserMetadata } from '@supabase/supabase-js'
 
@@ -16,10 +17,7 @@ const AvatarComponent = ( { user_metadata }: {
   return (
     <Dropdown>
       <DropdownTrigger className=" hover:cursor-pointer">
-        <Button
-        variant='bordered'
-        className=' py-6'
-        >
+        <Button variant="bordered" className=" py-6">
           <User
             name={user_metadata.custom_claims.global_name}
             description={user_metadata.full_name}
