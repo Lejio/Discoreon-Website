@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import { Providers } from "./providers";
 import DashNav from "./components/DashNav";
 import BackGround from "@/assets/background.svg";
-import MainNav from "./components/MainNav";
-import Image from "next/image";
+import NavbarComponent from "./components/NavbarComponent";
+import { UserMetadata } from "@supabase/supabase-js";
 
 export const metadata = {
   title: "Discoreon",
@@ -22,17 +22,17 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     data: { session },
   } = await supabase.auth.getSession();
 
+  const user_data: UserMetadata | undefined = session?.user.user_metadata;
+
   return (
     <html lang="en" className="light">
       <body>
-
         <Providers>
           {/* {session ? <DashNav /> : <MainNav />} */}
           {/* <Image src={BackGround} alt="type" className=" z-[-1] h-full object-fill absolute opacity-25" /> */}
-          <MainNav />
+          <NavbarComponent user_metadata={user_data} />
           {props.children}
         </Providers>
-
       </body>
     </html>
   );

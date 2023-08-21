@@ -5,6 +5,8 @@ import Image from "next/image";
 import NavItem from "./NavItem";
 import { NavItemType } from "@/types/types";
 import { Poppins } from "next/font/google"
+import { UserMetadata } from "@supabase/supabase-js";
+import AvatarComponent from "./AvatarComponent";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import {
   Navbar,
@@ -26,7 +28,10 @@ const poppins = Poppins({
   preload: false
 })
 
-export default function App() {
+export default function NavbarComponent({ user_metadata }: { 
+  user_metadata: UserMetadata | undefined
+}) {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const navItems: Array<NavItemType> = [
@@ -36,9 +41,9 @@ export default function App() {
     { label: "Showcase", href: "/showcase", color: "foreground" },
   ];
 
-    const navItemComponents = navItems.map((item: NavItemType) => (
-      <NavItem item={item} key={item.href}/>
-    ));
+  const navItemComponents = navItems.map((item: NavItemType) => (
+    <NavItem item={item} key={item.href} />
+  ));
 
   return (
     <Navbar
@@ -59,7 +64,7 @@ export default function App() {
 
       <NavbarContent justify="end">
         <NavbarItem className="lg:block hidden">
-          <LoginButton />
+          { user_metadata ? <AvatarComponent user_metadata={user_metadata} /> : <LoginButton />}
         </NavbarItem>
       </NavbarContent>
 
