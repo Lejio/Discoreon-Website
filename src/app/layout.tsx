@@ -2,7 +2,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { Providers } from "./providers";
-import DashNav from "./components/DashNav";
 import BackGround from "@/assets/background.svg";
 import NavbarComponent from "./components/NavbarComponent";
 import { UserMetadata } from "@supabase/supabase-js";
@@ -13,7 +12,11 @@ export const metadata = {
     "Invite the all new, advanced, full stack pokemon bot to your server to spice things up!",
 };
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+export default async function RootLayout(props: {
+  children: React.ReactNode;
+  authenticated: React.ReactNode;
+  loginmodal: React.ReactNode;
+}) {
   // Created a supabase server component using cookies.
   const supabase = createServerComponentClient({ cookies });
 
@@ -31,7 +34,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           {/* {session ? <DashNav /> : <MainNav />} */}
           {/* <Image src={BackGround} alt="type" className=" z-[-1] h-full object-fill absolute opacity-25" /> */}
           <NavbarComponent user_metadata={user_data} />
-          {props.children}
+          {/* {props.children} */}
+          {props.loginmodal}
+          {user_data ? props.authenticated : props.children}
         </Providers>
       </body>
     </html>
