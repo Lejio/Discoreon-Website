@@ -4,10 +4,10 @@ import React from "react";
 import Image from "next/image";
 import NavItem from "./NavItem";
 import { NavItemType } from "@/types/types";
-import { Poppins } from "next/font/google"
+import { Poppins } from "next/font/google";
 import { UserMetadata } from "@supabase/supabase-js";
 import AvatarComponent from "./AvatarComponent";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import {
   Navbar,
   NavbarBrand,
@@ -20,18 +20,25 @@ import {
   Divider,
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
-import LoginButton from "./LoginButton";
+// import Login from "./Login";
+// import LoginButton from "./LoginClient";
+import LoginClient from "./LoginClient";
+import { Prisma } from "@prisma/client";
+import { Pokemon } from "@/types/PokemonTypes";
 
 const poppins = Poppins({
   weight: "400",
   style: "normal",
-  preload: false
-})
+  preload: false,
+});
 
-export default function NavbarComponent({ user_metadata }: { 
-  user_metadata: UserMetadata | undefined
+export default function NavbarComponent({
+  user_metadata,
+  pokemon_data,
+}: {
+  user_metadata: UserMetadata | undefined;
+  pokemon_data: Pokemon;
 }) {
-
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const navItems: Array<NavItemType> = [
@@ -64,7 +71,12 @@ export default function NavbarComponent({ user_metadata }: {
 
       <NavbarContent justify="end">
         <NavbarItem className="lg:block hidden">
-          { user_metadata ? <AvatarComponent user_metadata={user_metadata} /> : <LoginButton />}
+          {user_metadata ? (
+            <AvatarComponent user_metadata={user_metadata} />
+          ) : (
+            // <Login />
+            <LoginClient pokemon={pokemon_data} />
+          )}
         </NavbarItem>
       </NavbarContent>
 

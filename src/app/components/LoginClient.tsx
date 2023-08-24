@@ -10,18 +10,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Input,
-  Checkbox,
-  Link,
+  Card,
+  CardBody,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { Prisma } from "@prisma/client";
+import Image from "next/image";
+import { Pokemon } from "@/types/PokemonTypes";
 
-export default function LoginButton() {
+export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const supabase = createClientComponentClient();
   const router = useRouter();
+
+  console.log(pokemon.versions);
 
   const loginHandler = async () => {
     // Creates a session object to retrieve the state of the session.
@@ -62,18 +65,24 @@ export default function LoginButton() {
               <ModalHeader className="flex flex-col gap-1">
                 Begin your adventure!
               </ModalHeader>
-              <div className=" bg-dark-primary h-52"></div>
-              <ModalBody>
-                <p>Login or Sign up today using your discord account.</p>\{" "}
-                <Button onClick={loginHandler} className="">
+              <ModalBody className=" py-6">
+                <Card>
+                  <CardBody className=" flex justify-center text-center">
+                    <p>{String(pokemon.name)}</p>
+                    <Image
+                      src={pokemon!.versions!.at(0)!.data.images.discord_image}
+                      alt={pokemon!.name}
+                      width={100}
+                      height={100}
+                    />
+                  </CardBody>
+                </Card>
+                {/* <div className=" bg-dark-primary h-52"></div> */}
+                <p>Login or Sign up today using your discord account.</p>
+                <Button onClick={loginHandler}>
                   <BsDiscord size={30} style={{ fill: "#5562EB" }} />
                 </Button>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
