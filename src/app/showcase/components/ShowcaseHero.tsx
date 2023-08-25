@@ -3,7 +3,6 @@ import ShowcaseCard from "./ShowcaseCard";
 import ShowcaseEngine from "./ShowcaseEngine";
 
 const ShowcaseHero = () => {
-
   return (
     <div className="flex flex-col items-center justify-evenly py-[10%]">
       <div className="flex flex-row align-center justify-center w-full">
@@ -15,4 +14,4 @@ const ShowcaseHero = () => {
   );
 };
 
-export default ShowcaseHero
+export default ShowcaseHero;

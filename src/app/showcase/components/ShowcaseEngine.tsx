@@ -20,7 +20,7 @@ export async function fetchPokemonData() {
 
 const ShowcaseEngine = async () => {
   const pokemon = await fetchPokemonData();
-  console.log(pokemon?.data.versions[0].data.images.discord_image);
+  // console.log(pokemon?.data.versions[0].data.images.discord_image);
 
   return (
     <>

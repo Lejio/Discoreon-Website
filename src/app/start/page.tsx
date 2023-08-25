@@ -1,11 +1,13 @@
 import React from "react";
-// import Navbar from "@/components/MainNavbar";
+import Sidebar from "./components/Sidebar";
 
-const about = () => {
+const getstarted = () => {
   return (
-    <div>
-      About Page
+    <div className="flex px-[15%] py-[5%]">
+      <Sidebar />
+      <main className="flex-1">{/* Main content of your page */}</main>
     </div>
   );
 };
-export default about;
+
+export default getstarted;

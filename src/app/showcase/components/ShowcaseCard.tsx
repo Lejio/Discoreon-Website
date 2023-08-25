@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactElement } from "react";
+import React, { ReactElement, Suspense } from "react";
 
 const ShowcaseCard = ({
   showcaseCard,
@@ -9,7 +9,7 @@ const ShowcaseCard = ({
 }) => {
   return (
     <div className=" bg-light-primary rounded-2xl h-[20%] w-[20%] p-5 mx-[5%]">
-      {showcaseCard}
+      <Suspense fallback={"loading..."}>{showcaseCard}</Suspense>
     </div>
   );
 };
