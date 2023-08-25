@@ -1,7 +1,5 @@
-import { nextui } from '@nextui-org/react';
-import type { Config } from 'tailwindcss'
-
-
+import { nextui } from "@nextui-org/react";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -21,6 +19,7 @@ const config: Config = {
     colors: {
       "dark-primary": "#232B48",
       "light-primary": "#5363AD",
+      "discord-primary": "5562EB",
       white: "rgb(255 255 255)",
       gray: "rgb(100 116 139)",
       "amber-300": "#fcd34d",
@@ -31,4 +30,4 @@ const config: Config = {
   darkMode: "class",
   plugins: [nextui()],
 };
-export default config
+export default config;

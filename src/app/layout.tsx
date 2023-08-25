@@ -1,18 +1,41 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import './globals.css'
-import { cookies } from 'next/headers';
-import { Providers } from './providers';
-import DashNav from './components/DashNav';
-import MainNav from './components/MainNav';
-
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import "./globals.css";
+import { cookies } from "next/headers";
+import { Providers } from "./providers";
+import BackGround from "@/assets/background.svg";
+import NavbarComponent from "./components/NavbarComponent";
+import { UserMetadata } from "@supabase/supabase-js";
+import prisma from "@/utils/prisma";
+import { MongoClient, ObjectId, Int32 } from "mongodb";
+import MongoConnection from "@/utils/mongo";
+import { Pokemon } from "@/types/PokemonTypes";
 
 export const metadata = {
-  title: 'Discoreon',
-  description: 'Invite the all new, advanced, full stack pokemon bot to your server to spice things up!',
+  title: "Discoreon",
+  description:
+    "Invite the all new, advanced, full stack pokemon bot to your server to spice things up!",
+};
+
+export async function fetchPokemonData() {
+  const randomNumber = Math.floor(Math.random() * 1011) + 1;
+
+  const connection = MongoConnection.getInstance();
+  const db = connection.getDb();
+  const collection = db.collection("pokemon");
+
+  const query_id = new Int32(randomNumber);
+
+  const pokemon = await collection.findOne({
+    _id: query_id,
+  });
+
+  return pokemon;
 }
 
 export default async function RootLayout(props: {
-  children: React.ReactNode,
+  children: React.ReactNode;
+  authenticated: React.ReactNode;
+  loginmodal: React.ReactNode;
 }) {
   // Created a supabase server component using cookies.
   const supabase = createServerComponentClient({ cookies });
@@ -22,13 +45,26 @@ export default async function RootLayout(props: {
     data: { session },
   } = await supabase.auth.getSession();
 
+  const user_data: UserMetadata | undefined = session?.user.user_metadata;
+
+  const pokemon = await fetchPokemonData();
+  let pokemonObject;
+  if (pokemon?.data && typeof pokemon.data === "object") {
+    pokemonObject = pokemon?.data as Pokemon;
+    // console.log(pokemonObject);
+  }
+
   return (
-    <html lang="en" className="light">
+    <html lang="en">
       <body>
         <Providers>
-          {/* {session ? <DashNav /> : <MainNav />} */}
-          <MainNav />
-          {props.children}
+          <NavbarComponent
+            user_metadata={user_data}
+            pokemon_data={pokemonObject!}
+          />
+          {/* {props.children} */}
+          {props.loginmodal}
+          {user_data ? props.authenticated : props.children}
         </Providers>
       </body>
     </html>

@@ -9,6 +9,7 @@ import TypesImage from "@/app/components/TypesImage";
 import Hero from "@/app/components/Hero";
 import Rare from "@/app/components/Rare";
 import Footer from "@/app/components/Footer";
+// import BackgroundImage from "./components/BackgroundImage";
 
 export default async function MainMenu() {
   // Created a supabase server component using cookies.
