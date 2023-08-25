@@ -5,8 +5,9 @@ import { Providers } from "./providers";
 import BackGround from "@/assets/background.svg";
 import NavbarComponent from "./components/NavbarComponent";
 import { UserMetadata } from "@supabase/supabase-js";
-import prisma from "@/utils/db";
-import { Prisma } from "@prisma/client";
+import prisma from "@/utils/prisma";
+import { MongoClient, ObjectId, Int32 } from "mongodb";
+import MongoConnection from "@/utils/mongo";
 import { Pokemon } from "@/types/PokemonTypes";
 
 export const metadata = {
@@ -18,8 +19,14 @@ export const metadata = {
 export async function fetchPokemonData() {
   const randomNumber = Math.floor(Math.random() * 1011) + 1;
 
-  const pokemon = await prisma.wild_pokemon_default.findFirst({
-    where: { id: randomNumber },
+  const connection = MongoConnection.getInstance();
+  const db = connection.getDb();
+  const collection = db.collection("pokemon");
+
+  const query_id = new Int32(randomNumber);
+
+  const pokemon = await collection.findOne({
+    _id: query_id,
   });
 
   return pokemon;
@@ -44,15 +51,13 @@ export default async function RootLayout(props: {
   let pokemonObject;
   if (pokemon?.data && typeof pokemon.data === "object") {
     pokemonObject = pokemon?.data as Pokemon;
-    console.log(pokemonObject);
+    // console.log(pokemonObject);
   }
 
   return (
     <html lang="en">
       <body>
         <Providers>
-          {/* {session ? <DashNav /> : <MainNav />} */}
-          {/* <Image src={BackGround} alt="type" className=" z-[-1] h-full object-fill absolute opacity-25" /> */}
           <NavbarComponent
             user_metadata={user_data}
             pokemon_data={pokemonObject!}

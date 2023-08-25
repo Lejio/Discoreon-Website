@@ -1,5 +1,5 @@
 import React from "react";
-import prisma from "@/utils/db";
+import prisma from "@/utils/prisma";
 import { Prisma } from "@prisma/client";
 import { Pokemon } from "@/types/PokemonTypes";
 
@@ -18,7 +18,7 @@ const LoginEngine = async () => {
   let pokemonObject;
   if (pokemon?.data && typeof pokemon.data === "object") {
     pokemonObject = pokemon?.data as Prisma.JsonObject;
-    console.log(pokemonObject.name);
+    // console.log(pokemonObject.name);
   }
   return (
     <div>

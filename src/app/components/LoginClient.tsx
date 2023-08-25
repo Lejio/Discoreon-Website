@@ -24,8 +24,6 @@ export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  console.log(pokemon.versions);
-
   const loginHandler = async () => {
     // Creates a session object to retrieve the state of the session.
     const session = await supabase.auth.getSession();
