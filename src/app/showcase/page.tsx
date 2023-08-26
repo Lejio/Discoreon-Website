@@ -5,7 +5,6 @@ import ShowcaseHero from "@/app/showcase/components/ShowcaseHero";
 const Showcase = () => {
   return (
     <div>
-      {/* <MainNavbar user_metadata={undefined} /> */}
       <ShowcaseHero />
     </div>
   );

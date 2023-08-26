@@ -2,11 +2,9 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { Providers } from "./providers";
-import BackGround from "@/assets/background.svg";
 import NavbarComponent from "./components/NavbarComponent";
 import { UserMetadata } from "@supabase/supabase-js";
-import prisma from "@/utils/prisma";
-import { MongoClient, ObjectId, Int32 } from "mongodb";
+import { Int32 } from "mongodb";
 import MongoConnection from "@/utils/mongo";
 import { Pokemon } from "@/types/PokemonTypes";
 
@@ -28,6 +26,8 @@ export async function fetchPokemonData() {
   const pokemon = await collection.findOne({
     _id: query_id,
   });
+
+  // connection.close();
 
   return pokemon;
 }

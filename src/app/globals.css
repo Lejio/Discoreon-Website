@@ -29,3 +29,16 @@ body {
 body {
   overflow-x: hidden;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Add a smooth transition for scroll links */
+/* a[href^="#"] {
+  transition: color 0.3s ease;
+}
+
+a[href^="#"]:hover {
+  color: #4f46e5;
+} */

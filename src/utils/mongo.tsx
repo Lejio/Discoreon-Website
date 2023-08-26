@@ -18,6 +18,10 @@ class MongoConnection {
     return this.instance;
   }
 
+  public close(): void {
+    this.client.close();
+  }
+
   public getDb(): Db {
     return this.db;
   }

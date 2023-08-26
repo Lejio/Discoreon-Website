@@ -20,14 +20,14 @@ export async function fetchPokemonData() {
 
 const ShowcaseEngine = async () => {
   const pokemon = await fetchPokemonData();
-  console.log(pokemon?.data.versions[0].data.images.discord_image);
+  // console.log(pokemon?.data.versions[0].data.images.discord_image);
 
   return (
     <>
       <h2>{Number(pokemon?._id)}</h2>
       <Image
         src={pokemon!.data.versions.at(0).data.images.discord_image}
-        alt={pokemon!.name}
+        alt={pokemon!.data.versions.at(0).name}
         width={500}
         height={500}
       />

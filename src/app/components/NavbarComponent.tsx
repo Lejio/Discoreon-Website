@@ -62,7 +62,7 @@ export default function NavbarComponent({
       }}
     >
       <NavbarBrand className=" block">
-        <Image src={Logo} alt={"Discoreon Logo"} height={50} />
+        <Image src={Logo} alt={"Discoreon Logo"} height={50} priority={true} />
       </NavbarBrand>
 
       <NavbarContent className="hidden lg:flex gap-x-0" justify="center">
