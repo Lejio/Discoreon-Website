@@ -25,6 +25,11 @@ const config: Config = {
       "amber-300": "#fcd34d",
       "amber-200": "#fef08a",
       "amber-100": "#fef9c3",
+      transparent: "transparent",
+      "from-transparent":
+        "--tw-gradient-from: transparent var(--tw-gradient-from-position); --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);",
+      "to-transparent":
+        "--tw-gradient-to: transparent var(--tw-gradient-to-position);",
     },
   },
   darkMode: "class",
