@@ -27,6 +27,8 @@ export async function fetchPokemonData() {
     _id: query_id,
   });
 
+  // connection.close();
+
   return pokemon;
 }
 

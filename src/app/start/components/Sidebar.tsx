@@ -21,12 +21,11 @@ const Sidebar = () => {
 
   const linkComponents = links.map((link) => {
     return (
-      <>
-        <Link key={link.label} href={link.href}>
-          {link.label}
-        </Link>
+      // Should have a key for the entire thing. So it should be a div instead of just a link.
+      <div key={link.label}>
+        <Link href={link.href}>{link.label}</Link>
         <Spacer y={3} />
-      </>
+      </div>
     );
   });
   return (
