@@ -20,8 +20,6 @@ import {
   Divider,
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
-// import Login from "./Login";
-// import LoginButton from "./LoginClient";
 import LoginClient from "./LoginClient";
 import { Prisma } from "@prisma/client";
 import { Pokemon } from "@/types/PokemonTypes";
