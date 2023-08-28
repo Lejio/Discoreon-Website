@@ -2,6 +2,7 @@
 
 import React, { ReactElement, Suspense } from "react";
 import ShowcaseCardLoading from "./ShowcaseCardLoading";
+import { Card } from "@nextui-org/react";
 
 const ShowcaseCard = ({
   showcaseCard,
@@ -9,10 +10,13 @@ const ShowcaseCard = ({
   showcaseCard: ReactElement<any, any>;
 }) => {
   return (
-    <div className=" bg-light-primary rounded-2xl h-[20%] w-[20%] p-5 mx-[5%]">
+    <Card
+      radius="md"
+      className=" bg-light-primary rounded-2xl h-[40%] w-[20%] p-5 mx-[5%]"
+    >
       <Suspense fallback={<ShowcaseCardLoading />}>{showcaseCard}</Suspense>
-      <ShowcaseCardLoading />
-    </div>
+      {/* <ShowcaseCardLoading /> */}
+    </Card>
   );
 };
 
