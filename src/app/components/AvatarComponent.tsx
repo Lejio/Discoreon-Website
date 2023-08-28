@@ -38,7 +38,7 @@ export default function AvatarComponent({
         <Link href={link.href}>{link.label}</Link>
       </DropdownItem>
     );
-    }
+  });
 
   const logout = async () => {
     console.log("clicked");
@@ -60,8 +60,8 @@ export default function AvatarComponent({
           {/* <Avatar src={`${user_metadata.picture}`} size="lg" /> */}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu>
-        {avatarComponents}
+      <DropdownMenu items={avatarItems}>
+        {avatarItems.map((link: LinkItem, index: number) => {})}
         <DropdownItem
           onClick={logout}
           className=" text-danger-400"
