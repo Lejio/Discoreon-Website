@@ -3,12 +3,11 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { NavItemType } from "@/types/types";
 import { motion, Variants } from "framer-motion";
-import { NavbarItem, Link } from "@nextui-org/react";
+import { NavbarItem } from "@nextui-org/react";
+import Link from "next/link";
 
 // NavItem Component --> A HTML li wrapper that adds come cool animations to it.
-const NavItem = ({
-  item,
-}: { item: NavItemType }) => {
+const NavItem = ({ item }: { item: NavItemType }) => {
   // React useRef hook to reference HTML elements.
   const spanRef = useRef(null);
   // Text width state used to measure how long the SVG line should be.
@@ -47,11 +46,7 @@ const NavItem = ({
   return (
     <NavbarItem className=" mx-[10%]">
       <motion.div whileHover="hover" initial="default" animate="default">
-        <Link
-          className={`flex flex-col text-lg`}
-          href={item.href}
-          color={item.color}
-        >
+        <Link className={`flex flex-col text-lg`} href={item.href}>
           {/* Text in this span is measured in pixels and then passed into textWidth */}
           <span
             ref={spanRef}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { Divider } from "@nextui-org/react";
@@ -23,12 +23,12 @@ const Footer = () => {
     //   <Divider orientation="vertical" className=" "/>
     //   <h3>&copy; Copyright 2023 Discoreon</h3>
     // </footer>
-    <footer className="">
+    <footer>
       <div className="flex h-5 items-center justify-center text-small my-[20%]">
         <a className={className} href="">
           Contact
         </a>
-        <Divider orientation="vertical" className=" border-dark-primary"/>
+        <Divider orientation="vertical" className=" border-dark-primary" />
         <a className={className} href="">
           Privacy
         </a>

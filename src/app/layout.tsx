@@ -51,7 +51,6 @@ export default async function RootLayout(props: {
   let pokemonObject;
   if (pokemon?.data && typeof pokemon.data === "object") {
     pokemonObject = pokemon?.data as Pokemon;
-    // console.log(pokemonObject);
   }
 
   return (
@@ -62,9 +61,8 @@ export default async function RootLayout(props: {
             user_metadata={user_data}
             pokemon_data={pokemonObject!}
           />
-          {/* {props.children} */}
           {props.loginmodal}
-          {user_data ? props.authenticated : props.children}
+          {props.children}
         </Providers>
       </body>
     </html>

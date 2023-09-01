@@ -43,23 +43,24 @@ export default function NavbarComponent({
     { label: "Get Started", href: "/start", color: "foreground" },
     { label: "Invite", href: "/invite", color: "foreground" },
     { label: "Premium", href: "/premium", color: "foreground" },
-    { label: "Showcase", href: "/showcase", color: "foreground" },
+    // { label: "Showcase", href: "/showcase", color: "foreground" },
   ];
 
-  const navItemComponents = navItems.map((item: NavItemType) => (
-    <NavItem item={item} key={item.href} />
+  const navItemComponents = navItems.map((item: NavItemType, index: number) => (
+    <NavItem item={item} key={index} />
   ));
 
   return (
     <Navbar
+      shouldHideOnScroll
       onMenuOpenChange={setIsMenuOpen}
       className={` ${poppins.className}`}
       classNames={{
         wrapper: "max-w-full lg:mx-[10%] gap-x-0",
-        content: "w-auto",
+        content: "",
       }}
     >
-      <NavbarBrand className=" block">
+      <NavbarBrand>
         <Image src={Logo} alt={"Discoreon Logo"} height={50} priority={true} />
       </NavbarBrand>
 
@@ -72,7 +73,6 @@ export default function NavbarComponent({
           {user_metadata ? (
             <AvatarComponent user_metadata={user_metadata} />
           ) : (
-            // <Login />
             <LoginClient pokemon={pokemon_data} />
           )}
         </NavbarItem>
