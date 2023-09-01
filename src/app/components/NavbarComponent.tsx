@@ -38,12 +38,19 @@ export default function NavbarComponent({
 }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const navItems: Array<NavItemType> = [
-    { label: "Get Started", href: "/start", color: "foreground" },
-    { label: "Invite", href: "/invite", color: "foreground" },
-    { label: "Premium", href: "/premium", color: "foreground" },
-    { label: "Showcase", href: "/showcase", color: "foreground" },
-  ];
+  const navItems: Array<NavItemType> = user_metadata
+    ? [
+        { label: "Dashboard", href: "/start", color: "foreground" },
+        { label: "Tutorial", href: "/start", color: "foreground" },
+        { label: "Forum", href: "/start", color: "foreground" },
+        { label: "Market", href: "/start", color: "foreground" },
+      ]
+    : [
+        { label: "Get Started", href: "/start", color: "foreground" },
+        { label: "Invite", href: "/invite", color: "foreground" },
+        { label: "Premium", href: "/premium", color: "foreground" },
+        { label: "Showcase", href: "/showcase", color: "foreground" },
+      ];
 
   const navItemComponents = navItems.map((item: NavItemType, index: number) => (
     <NavItem item={item} key={index} />
@@ -75,6 +82,10 @@ export default function NavbarComponent({
           )}
         </NavbarItem>
       </NavbarContent>
+      {/* <a href="#" className="group text-dark-primary transition duration-300">
+        Link
+        <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-dark-primary"></span>
+      </a> */}
 
       <NavbarContent justify="center" className="lg:hidden">
         <NavbarMenuToggle

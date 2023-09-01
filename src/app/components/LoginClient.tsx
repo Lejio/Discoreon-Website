@@ -14,12 +14,19 @@ import {
   CardBody,
   Button,
   useDisclosure,
+  CardHeader,
 } from "@nextui-org/react";
-import { Prisma } from "@prisma/client";
+import Bug from "@/assets/TypesSVG/Bug.svg";
 import Image from "next/image";
 import { Pokemon } from "@/types/PokemonTypes";
 
-export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
+export default function LoginClient({
+  pokemon,
+  login_redirect,
+}: {
+  pokemon: Pokemon;
+  login_redirect?: string;
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -36,9 +43,10 @@ export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
           redirectTo: `${SITE_URL}/api/auth`,
         },
       });
+      console.log(data);
     } else {
       // If the session is authenticated, then take them directly to the home page.
-      router.push(`${SITE_URL}/`);
+      router.push(`${SITE_URL}/${login_redirect}`);
     }
   };
 
@@ -64,15 +72,52 @@ export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
                 Begin your adventure!
               </ModalHeader>
               <ModalBody className=" py-6">
-                <Card>
-                  <CardBody className=" flex justify-center text-center">
-                    <p>{String(pokemon.name)}</p>
+                {/* <Card className="py-4">
+                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                    <p className="text-tiny uppercase font-bold">Daily Mix</p>
+                    <small className="text-default-500">12 Tracks</small>
+                    <h4 className="font-bold text-large">Frontend Radio</h4>
+                  </CardHeader>
+                  <CardBody className="overflow-visible py-2 relative">
                     <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl absolute"
                       src={pokemon!.versions!.at(0)!.data.images.discord_image}
-                      alt={pokemon!.name}
-                      width={100}
-                      height={100}
+                      width={270}
+                      height={270}
                     />
+                    <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl"
+                      src={Bug}
+                      width={270}
+                      height={270}
+                    />
+                  </CardBody>
+                </Card> */}
+                <Card>
+                  <CardHeader>
+                    <p>{String(pokemon.name)}</p>
+                  </CardHeader>
+                  <CardBody className=" text-center py-2">
+                    <div className="relative flex flex-col items-center">
+                      <Image
+                        src={Bug}
+                        alt="bug-type"
+                        width={250}
+                        height={250}
+                        // className="absolute"
+                      />
+                      <Image
+                        src={
+                          pokemon!.versions!.at(0)!.data.images.discord_image
+                        }
+                        className="absolute"
+                        alt={pokemon!.name}
+                        width={250}
+                        height={250}
+                      />
+                    </div>
                   </CardBody>
                 </Card>
                 {/* <div className=" bg-dark-primary h-52"></div> */}

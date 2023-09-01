@@ -2,7 +2,7 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import DashNavbar from "@/app/@authenticatedNav/DashNavbar";
+// import DashNavbar from "@/app/@authenticatedNav/DashNavbar";
 
 const Inventory = async () => {
   // Created a supabase server component using cookies.
