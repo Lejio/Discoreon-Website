@@ -19,5 +19,5 @@ export async function GET(request: Request) {
 
   // Redirecting to dashboard for now. Plan on working on parallel routes on main page.
   // revalidatePath(`${SITE_URL}/`);
-  return NextResponse.redirect(`${SITE_URL}/`);
+  return NextResponse.redirect(`${SITE_URL}/dashboard`);
 }

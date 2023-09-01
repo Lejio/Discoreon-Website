@@ -19,6 +19,8 @@ import { NavItemType } from "@/types/types";
 type LinkItem = {
   href: string;
   key: string;
+  color: string;
+  onPress: (() => void) | undefined;
 };
 
 export default function AvatarComponent({
@@ -29,25 +31,37 @@ export default function AvatarComponent({
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  const avatarItems: Array<LinkItem> = [
-    { href: "/profile", key: "Profile" },
-    { href: "/settings", key: "Settings" },
-  ];
-
-  // const avatarComponents = avatarItems.map((link: LinkItem, index: number) => {
-  //   return (
-  //     <DropdownItem key={index}>
-  //       <Link href={link.href}>{link.label}</Link>
-  //     </DropdownItem>
-  //   );
-  // });
-
   const logout = async () => {
-    console.log("clicked");
     const { error } = await supabase.auth.signOut();
     console.log(error);
     router.refresh();
   };
+
+  const avatarItems: Array<LinkItem> = [
+    {
+      href: "/profile",
+      key: "Profile",
+      color: "default",
+      onPress: () => {
+        router.push("/profile");
+      },
+    },
+    {
+      href: "/settings",
+      key: "Settings",
+      color: "default",
+      onPress: () => {
+        router.push("/settings");
+      },
+    },
+    {
+      href: "#",
+      key: "Logout",
+      color: "danger",
+      onPress: logout,
+    },
+  ];
+
   return (
     <Dropdown>
       <DropdownTrigger className=" hover:cursor-pointer">
@@ -65,9 +79,12 @@ export default function AvatarComponent({
       <DropdownMenu aria-label="Dynamic Actions" items={avatarItems}>
         {(items: DropdownItemProps<LinkItem>) => (
           <DropdownItem
+            onPress={items.onPress}
             key={items.key}
-            color={items.key === "delete" ? "danger" : "default"}
-            className={items.key === "delete" ? "text-danger" : ""}
+            color={items.color}
+            className={
+              items.key === "Logout" ? " text-danger-500" : " text-default-500"
+            }
           >
             {items.key}
           </DropdownItem>
@@ -85,58 +102,3 @@ export default function AvatarComponent({
     </Dropdown>
   );
 }
-
-// import React from "react";
-// import {
-//   Dropdown,
-//   DropdownTrigger,
-//   DropdownMenu,
-//   DropdownItem,
-//   Button,
-//   DropdownItemProps,
-// } from "@nextui-org/react";
-// import { UserMetadata } from "@supabase/supabase-js";
-
-// export default function App({
-//   user_metadata,
-// }: {
-//   user_metadata: UserMetadata;
-// }) {
-//   const items: Array<LinkItem> = [
-//     {
-//       key: "new",
-//       label: "New file",
-//     },
-//     {
-//       key: "copy",
-//       label: "Copy link",
-//     },
-//     {
-//       key: "edit",
-//       label: "Edit file",
-//     },
-//     {
-//       key: "delete",
-//       label: "Delete file",
-//     },
-//   ];
-
-//   return (
-//     <Dropdown>
-//       <DropdownTrigger>
-//         <Button variant="bordered">Open Menu</Button>
-//       </DropdownTrigger>
-//       <DropdownMenu aria-label="Dynamic Actions" items={items}>
-//         {(items: DropdownItemProps<LinkItem>) => (
-//           <DropdownItem
-//             key={items.key}
-//             color={items.key === "delete" ? "danger" : "default"}
-//             className={items.key === "delete" ? "text-danger" : ""}
-//           >
-//             {items.key}
-//           </DropdownItem>
-//         )}
-//       </DropdownMenu>
-//     </Dropdown>
-//   );
-// }

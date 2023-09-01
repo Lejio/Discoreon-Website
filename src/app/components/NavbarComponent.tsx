@@ -21,7 +21,6 @@ import {
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
 import LoginClient from "./LoginClient";
-import { Prisma } from "@prisma/client";
 import { Pokemon } from "@/types/PokemonTypes";
 
 const poppins = Poppins({
