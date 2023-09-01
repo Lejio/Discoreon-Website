@@ -44,7 +44,7 @@ const NavItem = ({ item }: { item: NavItemType }) => {
   }, [spanRef]);
 
   return (
-    <NavbarItem className=" mx-[10%]">
+    <NavbarItem>
       <motion.div whileHover="hover" initial="default" animate="default">
         <Link className={`flex flex-col text-lg`} href={item.href}>
           {/* Text in this span is measured in pixels and then passed into textWidth */}

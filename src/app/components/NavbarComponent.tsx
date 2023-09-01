@@ -43,7 +43,7 @@ export default function NavbarComponent({
     { label: "Get Started", href: "/start", color: "foreground" },
     { label: "Invite", href: "/invite", color: "foreground" },
     { label: "Premium", href: "/premium", color: "foreground" },
-    // { label: "Showcase", href: "/showcase", color: "foreground" },
+    { label: "Showcase", href: "/showcase", color: "foreground" },
   ];
 
   const navItemComponents = navItems.map((item: NavItemType, index: number) => (
@@ -52,11 +52,10 @@ export default function NavbarComponent({
 
   return (
     <Navbar
-      shouldHideOnScroll
       onMenuOpenChange={setIsMenuOpen}
       className={` ${poppins.className}`}
       classNames={{
-        wrapper: "max-w-full lg:mx-[10%] gap-x-0",
+        wrapper: "max-w-full lg:mx-[10%]",
         content: "",
       }}
     >
@@ -64,7 +63,7 @@ export default function NavbarComponent({
         <Image src={Logo} alt={"Discoreon Logo"} height={50} priority={true} />
       </NavbarBrand>
 
-      <NavbarContent className="hidden lg:flex gap-x-0" justify="center">
+      <NavbarContent className="hidden lg:flex gap-20" justify="center">
         {navItemComponents}
       </NavbarContent>
 
@@ -78,7 +77,7 @@ export default function NavbarComponent({
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="center" className=" w-[10%] lg:hidden">
+      <NavbarContent justify="center" className="lg:hidden">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="lg:hidden w-full"
