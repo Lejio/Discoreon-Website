@@ -1,4 +1,22 @@
-type Type = {};
+type Type =
+  | "Bug"
+  | "Dark"
+  | "Dragon"
+  | "Electric"
+  | "Fairy"
+  | "Fighting"
+  | "Fire"
+  | "Flying"
+  | "Ghost"
+  | "Grass"
+  | "Ground"
+  | "Ice"
+  | "Normal"
+  | "Poison"
+  | "Psychic"
+  | "Rock"
+  | "Steel"
+  | "Water";
 
 type AbilityData = {
   href: string;
@@ -47,9 +65,15 @@ type BaseStats = {
   Total: string;
 };
 
-type DefenseType = {};
+type Effectiveness = "super-effective" | "no effect" | "not very effective";
 
-type DefenseStats = any;
+type DefenseTypes = {
+  [PokemonType: string]: Effectiveness;
+};
+
+type DefenseStats = {
+  [Version: string]: DefenseTypes;
+};
 
 type Images = {
   discord_image: string;

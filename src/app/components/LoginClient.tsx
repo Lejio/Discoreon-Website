@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import MotionButton from "@/app/components/MotionButton";
 import { SITE_URL } from "@/utils/globals";
 import { BsDiscord } from "react-icons/bs";
+import { TypesImage } from "@/types/ImagePointers";
+import { Jost } from "next/font/google";
 import {
   Modal,
   ModalContent,
@@ -16,7 +18,7 @@ import {
   useDisclosure,
   CardHeader,
 } from "@nextui-org/react";
-import Bug from "@/assets/TypesSVG/Bug.svg";
+// import Bug from "@/assets/TypesSVG/Bug.svg";
 import Image from "next/image";
 import { Pokemon } from "@/types/PokemonTypes";
 
@@ -30,6 +32,13 @@ export default function LoginClient({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const supabase = createClientComponentClient();
   const router = useRouter();
+
+  const typeOfGeneratedPokemon: string = pokemon!
+    .versions!.at(0)
+    ?.data!.pokedex_data!.Type!.at(0)
+    ?.toString()!;
+
+  console.log(typeOfGeneratedPokemon);
 
   const loginHandler = async () => {
     // Creates a session object to retrieve the state of the session.
@@ -71,56 +80,32 @@ export default function LoginClient({
               <ModalHeader className="flex flex-col gap-1">
                 Begin your adventure!
               </ModalHeader>
-              <ModalBody className=" py-6">
-                {/* <Card className="py-4">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">Daily Mix</p>
-                    <small className="text-default-500">12 Tracks</small>
-                    <h4 className="font-bold text-large">Frontend Radio</h4>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2 relative">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl absolute"
-                      src={pokemon!.versions!.at(0)!.data.images.discord_image}
-                      width={270}
-                      height={270}
-                    />
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src={Bug}
-                      width={270}
-                      height={270}
-                    />
-                  </CardBody>
-                </Card> */}
+              <ModalBody className=" pb-6 pt-0">
                 <Card>
-                  <CardHeader>
+                  <CardHeader className="justify-center">
                     <p>{String(pokemon.name)}</p>
                   </CardHeader>
                   <CardBody className=" text-center py-2">
-                    <div className="relative flex flex-col items-center">
+                    <div className="relative flex flex-col items-center m-[5%]">
                       <Image
-                        src={Bug}
-                        alt="bug-type"
+                        src={TypesImage[typeOfGeneratedPokemon]}
+                        alt={`${typeOfGeneratedPokemon.toLowerCase()}-icon`}
                         width={250}
                         height={250}
-                        // className="absolute"
+                        className=" opacity-70"
                       />
                       <Image
                         src={
                           pokemon!.versions!.at(0)!.data.images.discord_image
                         }
-                        className="absolute"
+                        className="absolute bottom-4"
                         alt={pokemon!.name}
-                        width={250}
-                        height={250}
+                        width={200}
+                        height={200}
                       />
                     </div>
                   </CardBody>
                 </Card>
-                {/* <div className=" bg-dark-primary h-52"></div> */}
                 <p>Login or Sign up today using your discord account.</p>
                 <Button onClick={loginHandler}>
                   <BsDiscord size={30} style={{ fill: "#5562EB" }} />

@@ -82,10 +82,6 @@ export default function NavbarComponent({
           )}
         </NavbarItem>
       </NavbarContent>
-      {/* <a href="#" className="group text-dark-primary transition duration-300">
-        Link
-        <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-dark-primary"></span>
-      </a> */}
 
       <NavbarContent justify="center" className="lg:hidden">
         <NavbarMenuToggle
