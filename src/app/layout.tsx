@@ -7,6 +7,14 @@ import { UserMetadata } from "@supabase/supabase-js";
 import { Int32 } from "mongodb";
 import MongoConnection from "@/utils/mongo";
 import { Pokemon } from "@/types/PokemonTypes";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  style: "normal",
+  preload: false,
+  weight: ["400"],
+});
 
 export const metadata = {
   title: "Discoreon",
@@ -51,20 +59,18 @@ export default async function RootLayout(props: {
   let pokemonObject;
   if (pokemon?.data && typeof pokemon.data === "object") {
     pokemonObject = pokemon?.data as Pokemon;
-    // console.log(pokemonObject);
   }
 
   return (
     <html lang="en">
-      <body>
+      <body className={`${poppins.className}`}>
         <Providers>
           <NavbarComponent
             user_metadata={user_data}
             pokemon_data={pokemonObject!}
           />
-          {/* {props.children} */}
           {props.loginmodal}
-          {user_data ? props.authenticated : props.children}
+          {props.children}
         </Providers>
       </body>
     </html>

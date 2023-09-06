@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import MotionButton from "@/app/components/MotionButton";
 import { SITE_URL } from "@/utils/globals";
 import { BsDiscord } from "react-icons/bs";
+import { TypesImage } from "@/types/ImagePointers";
+import { Jost } from "next/font/google";
 import {
   Modal,
   ModalContent,
@@ -14,15 +16,29 @@ import {
   CardBody,
   Button,
   useDisclosure,
+  CardHeader,
 } from "@nextui-org/react";
-import { Prisma } from "@prisma/client";
+// import Bug from "@/assets/TypesSVG/Bug.svg";
 import Image from "next/image";
 import { Pokemon } from "@/types/PokemonTypes";
 
-export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
+export default function LoginClient({
+  pokemon,
+  login_redirect,
+}: {
+  pokemon: Pokemon;
+  login_redirect?: string;
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const supabase = createClientComponentClient();
   const router = useRouter();
+
+  const typeOfGeneratedPokemon: string = pokemon!
+    .versions!.at(0)
+    ?.data!.pokedex_data!.Type!.at(0)
+    ?.toString()!;
+
+  console.log(typeOfGeneratedPokemon);
 
   const loginHandler = async () => {
     // Creates a session object to retrieve the state of the session.
@@ -36,9 +52,10 @@ export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
           redirectTo: `${SITE_URL}/api/auth`,
         },
       });
+      console.log(data);
     } else {
       // If the session is authenticated, then take them directly to the home page.
-      router.push(`${SITE_URL}/`);
+      router.push(`${SITE_URL}/${login_redirect}`);
     }
   };
 
@@ -63,19 +80,32 @@ export default function LoginClient({ pokemon }: { pokemon: Pokemon }) {
               <ModalHeader className="flex flex-col gap-1">
                 Begin your adventure!
               </ModalHeader>
-              <ModalBody className=" py-6">
+              <ModalBody className=" pb-6 pt-0">
                 <Card>
-                  <CardBody className=" flex justify-center text-center">
+                  <CardHeader className="justify-center">
                     <p>{String(pokemon.name)}</p>
-                    <Image
-                      src={pokemon!.versions!.at(0)!.data.images.discord_image}
-                      alt={pokemon!.name}
-                      width={100}
-                      height={100}
-                    />
+                  </CardHeader>
+                  <CardBody className=" text-center py-2">
+                    <div className="relative flex flex-col items-center m-[5%]">
+                      <Image
+                        src={TypesImage[typeOfGeneratedPokemon]}
+                        alt={`${typeOfGeneratedPokemon.toLowerCase()}-icon`}
+                        width={250}
+                        height={250}
+                        className=" opacity-70"
+                      />
+                      <Image
+                        src={
+                          pokemon!.versions!.at(0)!.data.images.discord_image
+                        }
+                        className="absolute bottom-4"
+                        alt={pokemon!.name}
+                        width={200}
+                        height={200}
+                      />
+                    </div>
                   </CardBody>
                 </Card>
-                {/* <div className=" bg-dark-primary h-52"></div> */}
                 <p>Login or Sign up today using your discord account.</p>
                 <Button onClick={loginHandler}>
                   <BsDiscord size={30} style={{ fill: "#5562EB" }} />

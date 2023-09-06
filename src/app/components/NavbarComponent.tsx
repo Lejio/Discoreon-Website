@@ -21,7 +21,6 @@ import {
 } from "@nextui-org/react";
 import Logo from "@/assets/discoreon_pokeball.png";
 import LoginClient from "./LoginClient";
-import { Prisma } from "@prisma/client";
 import { Pokemon } from "@/types/PokemonTypes";
 
 const poppins = Poppins({
@@ -39,15 +38,22 @@ export default function NavbarComponent({
 }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const navItems: Array<NavItemType> = [
-    { label: "Get Started", href: "/start", color: "foreground" },
-    { label: "Invite", href: "/invite", color: "foreground" },
-    { label: "Premium", href: "/premium", color: "foreground" },
-    { label: "Showcase", href: "/showcase", color: "foreground" },
-  ];
+  const navItems: Array<NavItemType> = user_metadata
+    ? [
+        { label: "Dashboard", href: "/start", color: "foreground" },
+        { label: "Tutorial", href: "/start", color: "foreground" },
+        { label: "Forum", href: "/start", color: "foreground" },
+        { label: "Market", href: "/start", color: "foreground" },
+      ]
+    : [
+        { label: "Get Started", href: "/start", color: "foreground" },
+        { label: "Invite", href: "/invite", color: "foreground" },
+        { label: "Premium", href: "/premium", color: "foreground" },
+        { label: "Showcase", href: "/showcase", color: "foreground" },
+      ];
 
-  const navItemComponents = navItems.map((item: NavItemType) => (
-    <NavItem item={item} key={item.href} />
+  const navItemComponents = navItems.map((item: NavItemType, index: number) => (
+    <NavItem item={item} key={index} />
   ));
 
   return (
@@ -55,15 +61,15 @@ export default function NavbarComponent({
       onMenuOpenChange={setIsMenuOpen}
       className={` ${poppins.className}`}
       classNames={{
-        wrapper: "max-w-full lg:mx-[10%] gap-x-0",
-        content: "w-auto",
+        wrapper: "max-w-full lg:mx-[10%]",
+        content: "",
       }}
     >
-      <NavbarBrand className=" block">
+      <NavbarBrand>
         <Image src={Logo} alt={"Discoreon Logo"} height={50} priority={true} />
       </NavbarBrand>
 
-      <NavbarContent className="hidden lg:flex gap-x-0" justify="center">
+      <NavbarContent className="hidden lg:flex gap-20" justify="center">
         {navItemComponents}
       </NavbarContent>
 
@@ -72,13 +78,12 @@ export default function NavbarComponent({
           {user_metadata ? (
             <AvatarComponent user_metadata={user_metadata} />
           ) : (
-            // <Login />
             <LoginClient pokemon={pokemon_data} />
           )}
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="center" className=" w-[10%] lg:hidden">
+      <NavbarContent justify="center" className="lg:hidden">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="lg:hidden w-full"

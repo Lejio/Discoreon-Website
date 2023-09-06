@@ -62,7 +62,7 @@ const EmbedBody = () => {
           <br />
           <p className="md:text-3xl md:leading-tight">
             Each page contains colors <br />
-            custom to the pokemon's type.
+            custom to the pokemon&apos;s type.
           </p>
         </motion.div>
       </div>

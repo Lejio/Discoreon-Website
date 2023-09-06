@@ -2,9 +2,10 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-// import DashNavbar from "@/app/@authenticatedNav/DashNavbar";
+import HomeHero from "@/app/@authenticated/components/HomeHero";
 
-const Inventory = async () => {
+// Home Page --> The landing page of the user after they have successfully signed up with discord.
+const Home = async () => {
   // Created a supabase server component using cookies.
   const supabase = createServerComponentClient({ cookies });
 
@@ -21,7 +22,11 @@ const Inventory = async () => {
   // Gets the metadata object of the signed in discord user after checking session exists.
   const discord_metadata = session.user.user_metadata;
 
-  return <div>Inventory</div>;
+  return (
+    <main className="flex flex-col align-middle justify-center">
+      <HomeHero discord_user={discord_metadata} />
+    </main>
+  );
 };
 
-export default Inventory;
+export default Home;
